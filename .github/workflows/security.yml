@@ -15,12 +15,13 @@ jobs:
 
       # 🔐 Secret Scan (CLI Mode - Strong Detection)
 # 🔐 Secret Scan (Force filesystem mode)
-      - name: Run Gitleaks (Filesystem Mode)
+      # 🔐 Secret Scan (Strict Mode)
+      - name: Run Gitleaks (Strict)
         run: |
           docker run --rm \
             -v ${{ github.workspace }}:/repo \
             zricethezav/gitleaks:latest \
-            detect --source="/repo" --no-git --verbose --redact
+            detect --source="/repo" --no-git --redact --exit-code 1
 
       # 🛡 Dependency Scan
       - name: Install Dependencies
