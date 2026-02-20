@@ -13,11 +13,13 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # 🔐 Secret Scan
-      - name: Run Gitleaks
-        uses: gitleaks/gitleaks-action@v2
-        with:
-          args: detect --verbose --redact
+      # 🔐 Secret Scan (CLI Mode - Strong Detection)
+      - name: Run Gitleaks (Docker)
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}:/repo \
+            zricethezav/gitleaks:latest \
+            detect --source="/repo" --verbose --redact
 
       # 🛡 Dependency Scan
       - name: Install Dependencies
