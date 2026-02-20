@@ -1,3 +1,10 @@
+name: DevSecOps Security Gate
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
 jobs:
   security-checks:
     runs-on: ubuntu-latest
@@ -20,4 +27,4 @@ jobs:
 
       # 🔍 Dependency Scan
       - name: Run npm audit
-        run: npm audit --audit-level=high 
+        run: npm audit --audit-level=high
